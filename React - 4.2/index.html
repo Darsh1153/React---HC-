@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input id="title" type="text" placeholder="enter title"></input> <br><br>
+    <input id="description" type="text" placeholder="enter description"></input> <br><br>
+    <button onclick="addTodo()">Add todo</button>
+
+    <div id="postedTodos">
+
+    </div>
+
+</body>
+<script>
+    function addTodo() {
+        const inputTitle = document.getElementById('title').value;
+        const inputDescription = document.getElementById('description').value;
+
+        const todoDiv = document.createElement('div');
+
+        const titleElement = document.createElement('h3');
+        titleElement.innerHTML = inputTitle;
+
+        const descElement = document.createElement('p');
+        descElement.innerHTML = inputDescription;
+
+        const doneButton = document.createElement('button');
+        doneButton.innerHTML = "Mark as done";
+        doneButton.onclick = function(){
+            doneButton.disabled = true;
+            doneButton.innerHTML = "Done";
+        }
+
+        todoDiv.appendChild(titleElement);
+        todoDiv.appendChild(descElement);
+        todoDiv.appendChild(doneButton);
+
+        document.getElementById('postedTodos').appendChild(todoDiv);
+
+        document.getElementById('title').value = '';
+        document.getElementById('description').value = '';
+
+
+
+        // document.getElementById('postedTodos').innerHTML = `<div>
+        //     <div>${inputTitle}</div>
+        //     <div>${inputDescription}</div>
+        //     <button>Mark as todo</button>
+        //     </div>`
+    }
+</script>
+
+</html>
+
