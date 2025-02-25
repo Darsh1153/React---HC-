@@ -53,3 +53,18 @@ How react re-renders any change in the state.
 
 
 
+why react returns a single child?
+React requires a single child (one root element) in a component because JSX expressions must have only one parent element. This ensures that the virtual DOM tree remains structured and predictable.
+
+Why Does React Enforce a Single Root Element?
+Consistency in the Virtual DOM
+
+React constructs a tree structure internally. If there were multiple root elements, React wouldn't know how to efficiently manage updates.
+Avoiding Ambiguity
+
+Returning multiple root elements without a wrapper could confuse React about what to render first.
+Performance Optimization
+
+A single root node allows React to efficiently apply updates and manage component reconciliation.
+
+
