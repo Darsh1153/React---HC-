@@ -68,3 +68,34 @@ Performance Optimization
 A single root node allows React to efficiently apply updates and manage component reconciliation.
 
 
+What is a wrapper component? <br /> <br />
+- A Wrapper Component is a React component that wraps around other components or elements to provide additional styling, logic, or behavior. It acts as a reusable container for content. <br />
+import React from "react";
+
+function App() {
+  return (
+    <div>
+      <CardWrapper>
+        hi there
+      </CardWrapper>
+
+      <CardWrapper>
+        hello there
+      </CardWrapper>
+    </div>
+  )
+}
+
+function CardWrapper({ children }) {
+  // create a div with just a border
+  // put the innerComponent that is passed as prop
+  return (
+    <div style={{ border: "2px solid black" }}>
+      {children}
+    </div>
+  )
+}
+
+export default App
+
+
