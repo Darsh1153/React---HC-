@@ -102,4 +102,37 @@ export default App
 <img width="551" alt="image" src="https://github.com/user-attachments/assets/30cd4ee5-0677-4b0c-8879-422ac50f5841" />
 
 
+<br/> <br/>
+useMemo <br/>
+
+import { useMemo, useState } from 'react'
+import './App.css'
+
+function App() {
+
+  const [count, setCount] = useState(0);
+  const [input, setInput] = useState(0);
+
+  function incrementCounter(){
+    setCount(count+1);
+  }
+
+  function expensiveTask(num){
+    for(let i=0; i<1000000000; i++){}
+    return num*2;
+  }
+  let doubledValue = useMemo(() => expensiveTask(input), [input]);
+  return (
+    <div>
+      <button onClick={incrementCounter}>Click me</button>
+      <div>counter: {count}</div>
+      <input type="number" placeholder='Enter number' onChange={(e)=>setInput(e.target.value)} />
+      <div>{doubledValue}</div>
+    </div>
+  )
+}
+
+export default App
+
+
 
