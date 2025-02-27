@@ -166,7 +166,6 @@ const cachedValue = useMemo(calculateValue, dependencies)
 
 // export default App
 
-
 /*
 input tag (number)
 div> the sum from 1 to input passed is {sum}
@@ -180,6 +179,7 @@ import { useEffect } from 'react';
 function App() {
   const [input, setInput] = useState(0); // 15 input: 15
   const [finalSum, setFinalSum] = useState(0);
+  const [count, setCount] = useState(0);
 
   // useEffect(() => {
   //   let count = 0;
@@ -190,6 +190,7 @@ function App() {
   // }, [input])
 
   let totalSum = useMemo(() => {
+    console.log("memo got called");
     let count = 0;
     for(let i=1; i<=input; i++){
       count += i;
@@ -200,11 +201,10 @@ function App() {
     <div>
       <input type="number" placeholder='Enter number' onChange={(e)=>setInput(e.target.value)} />
       <div>The sum from 1 to {input} is: {totalSum}</div>
+
+      <button onClick={()=>setCount(count+1)}>Click me! {count}</button>
     </div>
   )
 }
 
 export default App
-
-
-
