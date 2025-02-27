@@ -135,4 +135,76 @@ function App() {
 export default App
 
 
+<br/> <br/> <br/>
+
+useMemo <br/>
+
+useMemo is a React Hook that lets you cache the result of a calculation between re-renders.
+const cachedValue = useMemo(calculateValue, dependencies)
+<br/>
+
+// import React from 'react'
+// import { useState } from 'react';
+
+// function App() {
+//   const [input, setInput] = useState(0);
+//   const [count, setCount] = useState(0);
+
+//   let sum = 0;
+//   for(let i=1; i<=input; i++){
+//     sum+=i;
+//   }
+//   return (
+//     <div>
+//       <input type="number" placeholder='Enter number' onChange={(e)=>setInput(e.target.value)} />
+//       <div>sum from 1 to {input} is : {sum}</div>
+
+//       <button onClick={()=>setCount(count+1)}>Counter: {count}</button>
+//     </div>
+//   )
+// }
+
+// export default App
+
+
+/*
+input tag (number)
+div> the sum from 1 to input passed is {sum}
+*/
+
+import React from 'react'
+import { useMemo } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+
+function App() {
+  const [input, setInput] = useState(0); // 15 input: 15
+  const [finalSum, setFinalSum] = useState(0);
+
+  // useEffect(() => {
+  //   let count = 0;
+  //   for(let i=1; i<=input; i++){
+  //     count = count + i;
+  //   }
+  //   setFinalSum(count);
+  // }, [input])
+
+  let totalSum = useMemo(() => {
+    let count = 0;
+    for(let i=1; i<=input; i++){
+      count += i;
+    }
+    return count;
+  }, [input])
+  return (
+    <div>
+      <input type="number" placeholder='Enter number' onChange={(e)=>setInput(e.target.value)} />
+      <div>The sum from 1 to {input} is: {totalSum}</div>
+    </div>
+  )
+}
+
+export default App
+
+
 
