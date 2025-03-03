@@ -1,51 +1,44 @@
-import { Suspense, useState } from 'react'
-import './App.css'
-import { lazy } from 'react'
-const Dashboard = lazy(() => import("./pages/Dashboard"))
-const Landing = lazy(() => import("./pages/Landing"))
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { useState } from 'react'
+import { CountContext } from './Context';
 
 function App() {
-  // const navigate = useNavigate();
+  const [count, setCount] = useState(0);
 
   return (
     <div>
-      {/* <div>
-        <button onClick={() => {
-          window.location.href = "/";
-        }}>
-          Landing Page
-        </button>
-
-        <button onClick={() => {
-          window.location.href = "/dashboard";
-        }}>
-          Dashboard Page
-        </button>
-      </div> */}
-
-
-      <BrowserRouter>
-        <Appbar />
-        <Routes>
-          <Route path="/dashboard" element={<Suspense fallback={"loading..."}><Dashboard /></Suspense>}></Route>
-          <Route path="/" element={<Suspense fallback={"loading..."}><Landing /></Suspense>}></Route>
-        </Routes>
-      </BrowserRouter>
+      <CountContext.Provider value={count}>
+        <Count setCount={setCount}></Count>
+      </CountContext.Provider>
     </div>
   )
 }
 
-function Appbar() {
-  const navigate = useNavigate();
+function Count({ setCount }) {
+  return (
+    <div>
+      <CountRenderer></CountRenderer>
+      <Buttons setCount={setCount}></Buttons>
+    </div>
+  )
+}
+function CountRenderer() {
+  const count = useContext(CountContext);
+  return (
+    <div>{count}</div>
+  )
+}
+function Buttons({setCount}) {
+  const count = useContext(CountContext);
   return (
     <div>
       <button onClick={() => {
-        navigate("/");
-      }}>Landing Page</button>
+        setCount(count + 1);
+      }}>Increase</button>
+
       <button onClick={() => {
-        navigate("/dashboard");
-      }}>Dashboard Page</button>
+        setCount(count - 1);
+      }}>Decrease</button>
     </div>
   )
 }
